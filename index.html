@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" id="city">
+  <button id="button">Fetch</button>
+  <div id="info">
+    <p id="weather"></p>
+    <p id="name"></p>
+  </div>
+  <script>
+    const input = document.getElementById('city');
+    const button = document.getElementById('button');
+    const weatherContainer = document.getElementById('weather');
+    const nameContainer = document.getElementById('name');
+    async function buttonClick(e){
+      e.preventDefault();
+      const city = input.value;
+      console.log(city);
+      const request = await fetch(`http://localhost:3000/yehor_kardash/${city}`);
+      const data = await request.json();
+      console.log(data);
+      weatherContainer.textContent=`${data.city}, Temp:${data.temperature}, lat:${data.lat}, lon:${data.lon}`;
+      nameContainer.textContent=data.student;
+    }
+    button.onclick = buttonClick;
+  </script>
+</body>
+</html>
